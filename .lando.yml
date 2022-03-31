@@ -1,0 +1,9 @@
+recipe: wordpress
+config:
+  php: '8.1'
+  via: nginx
+  webroot: web
+  database: mariadb
+  xdebug: false
+  composer_version: '1.10.1'
+name: recipepocket
