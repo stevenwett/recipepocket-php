@@ -1,19 +1,38 @@
 # ignore everything in the root except the "wp-content" directory.
-web
-!web/wp-content/
+*
+!wp-content
+!wp-config.php
+!index.php
+!.editorconfig
+!composer.json
+!composer.lock
+
+!wp
+wp/*
+
+!lib
+!lib/*
 
 # ignore everything in the "wp-content" directory, except:
 # "mu-plugins", "plugins", "themes" directory
-web/wp-content/*
-!web/wp-content/mu-plugins/
-!web/wp-content/plugins/
-!web/wp-content/themes/
+wp-content/*
+!wp-content/index.php
+!wp-content/mu-plugins/
 
 # ignore these plugins
-web/wp-content/plugins/hello.php
+!wp-content/plugins/
+wp-content/plugins/*
+!wp-content/plugins/index.php
 
 # ignore specific themes
-web/wp-content/themes/twenty*/
+!wp-content/themes/
+wp-content/themes/*
+!wp-content/themes/recipepocket
+!wp-content/themes/recipepocket/*
+!wp-content/themes/index.php
+
+!wp-content/uploads/
+wp-content/uploads/*
 
 # ignore node dependency directories
 node_modules/

@@ -1,0 +1,17 @@
+{
+    "name": "recipepocket",
+    "version": "1.0.0",
+    "author": "Steven Wett <stevenwett@gmail.com>",
+    "description": "A simple recipe app.",
+    "main": "build",
+    "private": true,
+    "scripts": {},
+    "devDependencies": {
+        "@wordpress/eslint-plugin": "*"
+    },
+    "dependencies": {
+        "eslint": "*",
+        "stylelint": "*",
+        "stylelint-config-wordpress": "*"
+    }
+}
