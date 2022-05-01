@@ -3,7 +3,13 @@ config:
   php: '8.1'
   via: nginx
   webroot: .
-  database: mariadb
   xdebug: false
+  database: mariadb
   composer_version: '1.10.1'
+services:
+  database:
+    creds:
+      user: wordpress
+      password: wordpress
+      database: wordpress
 name: recipepocket

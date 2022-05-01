@@ -4,13 +4,46 @@
  * You can move this to its own file and include here via php's include("MySite.php")
  */
 class Recipepocket_App extends Timber\Site {
+	/**
+	 * Auth controller
+	 *
+	 * @var false|class $auth_controller Auth controller.
+	 */
+	public $auth_controller = false;
+
 	/** Add timber support. */
 	public function __construct() {
+		// Firebase auth controller.
 		add_action( 'after_setup_theme', array( $this, 'theme_supports' ) );
 		add_filter( 'timber/context', array( $this, 'add_to_context' ) );
 		add_filter( 'timber/twig', array( $this, 'add_to_twig' ) );
 		// add_action( 'init', array( $this, 'register_post_types' ) );
 		// add_action( 'init', array( $this, 'register_taxonomies' ) );
+
+		require_once ROOTPATH . '/vendor/stevenwett/wp-firebase-auth/src/class-auth.php';
+		$this->auth_controller = new \Stevenwett\WPFirebaseAuth\Auth( true, true );
+
+		// $auth_controller->authenticate_user('stevenwett@gmail.com', '123456');
+		// $auth_controller->remove_user_authentication();
+		// $auth_controller->reset_password('n4K8bvHP8leV6KJybyl6R4DsDqA3', '123456');
+		// $auth_controller->enable_user('n4K8bvHP8leV6KJybyl6R4DsDqA3');
+		// $new_user = $auth_controller->create_firebase_user( 'stevenwett+1@gmail.com' );
+		// var_dump( $new_user );
+
+		// Removing comments.
+		add_action( 'admin_init', array( $this, 'disable_comments_post_types_support' ) );
+		add_filter( 'comments_open', array( $this, 'disable_comments_status' ), 20, 2 );
+		add_filter( 'pings_open', array( $this, 'disable_comments_status' ), 20, 2 );
+		add_filter( 'comments_array', array( $this, 'disable_comments_hide_existing_comments', 10, 2 ) );
+		add_action( 'admin_menu', array( $this, 'disable_comments_admin_menu' ) );
+		add_action( 'admin_init', array( $this, 'disable_comments_admin_menu_redirect' ) );
+		add_action( 'admin_init', array( $this, 'disable_comments_dashboard' ) );
+		add_action( 'wp_before_admin_bar_render', array( $this, 'remove_comments_admin_bar' ) );
+		add_action( 'init', array( $this, 'disable_comments_admin_bar' ) );
+
+		// Remove head information.
+		add_action( 'init', array( $this, 'remove_head_info' ) );
+
 		parent::__construct();
 	}
 	/** This is where you can register custom post types. */
@@ -19,7 +52,6 @@ class Recipepocket_App extends Timber\Site {
 	}
 	/** This is where you can register custom taxonomies. */
 	public function register_taxonomies() {
-
 	}
 
 	/** This is where you add some context

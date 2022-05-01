@@ -1,6 +1,62 @@
 {
+	"name": "stevenwett/recipepocket-php",
+	"description": "A receipe app developed in PHP for WordPress.",
+	"type": "project",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "stevenwett",
+			"email": "stevenwett@gmail.com"
+		}
+	],
+	"repositories": [
+		{
+			"type":"package",
+			"package": {
+				"name": "stevenwett/wp-firebase-auth",
+				"version":"v0.0.6",
+				"source": {
+					"url": "git@github.com:stevenwett/wp-firebase-auth.git",
+					"type": "git",
+					"reference":"v0.0.6"
+				}
+			}
+		},
+		{
+			"type":"composer",
+			"url":"https://wpackagist.org",
+			"only": [
+				"wpackagist-plugin/*"
+			]
+		}
+	],
+	"require": {
+		"stevenwett/wp-firebase-auth": "v0.0.6",
+		"kreait/firebase-php": "5.21.0",
+		"lcobucci/jwt": "^4.1.4",
+		"wpackagist-plugin/wp-mail-smtp": "^3.4.0"
+	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "*",
 		"wp-coding-standards/wpcs": "*"
+	},
+	"config": {
+		"preferred-install": {
+			"stevenwett/wp-firebase-auth": "source",
+			"*": "dist"
+		},
+		"allow-plugins": {
+			"composer/installers": true
+		}
+	},
+	"extra": {
+		"installer-paths": {
+			"wp-content/mu-plugins/{$name}/": [
+				"wpackagist-plugin/wp-mail-smtp"
+			],
+			"wp-content/plugins/{$name}/": [
+				"type:wordpress-plugin"
+			]
+		}
 	}
 }
