@@ -189,6 +189,7 @@ class User_Controller {
 			$response_message = 'New user created.';
 		} catch ( \Exception $e ) {
 			// TODO: Log error.
+			$response_message = $e->getMessage();
 		}
 
 		return array(
@@ -204,6 +205,82 @@ class User_Controller {
 	 * @param array $user_data User data.
 	 */
 	public function update_user( $user_data ) {
+		global $wpdb;
+
+		$response_code    = 400;
+		$response_message = '';
+		$response_user    = array();
+
+		try {
+			if ( empty( $user_data ) ) {
+				throw new \Exception( 'No user data.', 400 );
+			}
+
+			if ( empty( $user_data['firebase_uid'] ) ) {
+				throw new \Exception( 'No firebase_uid in user data.', 400 );
+			}
+
+			$firebase_uid = $user_data['firebase_uid'];
+			$user         = array(
+				'gmt_modified' => current_time( 'mysql', true ),
+			);
+
+			$format = array(
+				'%s',
+			);
+
+			if ( isset( $user_data['email'] ) ) {
+				$email = filter_var( $request['email'], FILTER_VALIDATE_EMAIL );
+
+				if ( ! $email ) {
+					$response_code = 406;
+					throw new \Exception( 'Email not valid.', 406 );
+				}
+
+				$user['email'] = $email;
+				$format[]      = '%s';
+			}
+
+			if ( isset( $user_data['first_name'] ) ) {
+				$user['first_name'] = sanitize_text_field( $user_data['first_name'] );
+				$format[]           = '%s';
+			}
+
+			if ( isset( $user_data['last_name'] ) ) {
+				$user['last_name'] = sanitize_text_field( $user_data['last_name'] );
+				$format[]          = '%s';
+			}
+
+			$update_response = $wpdb->update(
+				'recipepocket_users',
+				$user,
+				array(
+					'firebase_uid' => $firebase_uid,
+				),
+				$format,
+				array(
+					'%s',
+				)
+			);
+
+			if ( null === $update_response ) {
+				$response_code = 409;
+				throw new \Exception( 'Error updating user.', 409 );
+			}
+
+			$response_user    = $this->get_user( $firebase_uid );
+			$response_message = 'Updated user.';
+
+		} catch ( \Exception $e ) {
+			// TODO: Log error.
+			$response_message = $e->getMessage();
+		}
+
+		return array(
+			'code'    => $response_code,
+			'message' => $response_message,
+			'user'    => $response_user,
+		);
 	}
 
 	/**
@@ -212,6 +289,54 @@ class User_Controller {
 	 * @param array $user_id User ID.
 	 */
 	public function delete_user( $user_data ) {
+		global $wpdb;
+
+		$response_code    = 400;
+		$response_message = '';
+
+		try {
+			if ( empty( $user_data ) ) {
+				throw new \Exception( 'No user data.', 400 );
+			}
+
+			if ( empty( $user_data['id'] ) ) {
+				throw new \Exception( 'No id in user data.', 400 );
+			}
+
+			if ( empty( $user_data['firebase_uid'] ) ) {
+				throw new \Exception( 'No firebase_uid in user data.', 400 );
+			}
+
+			$user_id      = (int) $user_data['id'];
+			$firebase_uid = $user_data['firebase_uid'];
+
+			$delete_response = $wpdb->delete(
+				'recipepocket_users',
+				array(
+					'id'           => $user_id,
+					'firebase_uid' => $firebase_uid,
+				),
+				array(
+					'%d',
+					'%s',
+				)
+			);
+
+			if ( ! $delete_response ) {
+				throw new \Exception( sprintf( 'Cannot delete user %d. Error with delete database query.', $user_id ), 400 );
+			}
+
+			$response_code    = 200;
+			$response_message = 'User deleted';
+		} catch ( \Exception $e ) {
+			// TODO: Log error.
+			$response_message = $e->getMessage();
+		}
+
+		return array(
+			'code'    => $response_code,
+			'message' => $response_message,
+		);
 	}
 
 	/**
