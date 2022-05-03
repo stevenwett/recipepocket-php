@@ -7,18 +7,31 @@
  * @version 0.0.1
  */
 
-namespace Recipepocket;
-
 /**
  * The primary class for this site.
  */
 class Site extends Timber\Site {
 	/**
-	 * Auth controller
+	 * User authentication status
 	 *
-	 * @var false|class $auth_controller Auth controller.
+	 * @var bool $is_authorized Is signed in.
 	 */
-	public $auth_controller = false;
+	public $is_authorized = false;
+
+	/**
+	 * Firebase unique ID for the current user
+	 * Created by Firebase
+	 *
+	 * @var string $firebase_uid Firebase ID for the user.
+	 */
+	public $firebase_uid = '';
+
+	/**
+	 * The current user record.
+	 *
+	 * @var mixed|object $user Current User Record.
+	 */
+	public $user = array();
 
 	/** Add timber support. */
 	public function __construct() {
@@ -30,9 +43,20 @@ class Site extends Timber\Site {
 		// add_action( 'init', array( $this, 'register_taxonomies' ) );
 
 		require_once ROOTPATH . '/vendor/stevenwett/wp-firebase-auth/src/class-auth.php';
-		$this->auth_controller = new \Stevenwett\WPFirebaseAuth\Auth( true, true );
+		$auth_controller = new \Stevenwett\WPFirebaseAuth\Auth( true, true );
 
 		// $auth_controller->authenticate_user('stevenwett@gmail.com', '123456');
+		$this->is_authorized = $auth_controller->is_authorized;
+		$this->firebase_uid  = $auth_controller->firebase_uid;
+
+		require_once get_template_directory() . '/includes/class-user-controller.php';
+		$user_controller = new \Recipepocket\User_Controller( $this->is_authorized, $this->firebase_uid, true );
+
+		$this->user = $user_controller->current_user();
+
+		var_dump( $this->user );
+		// var_dump( $this->is_authorized );
+
 		// $auth_controller->remove_user_authentication();
 		// $auth_controller->reset_password('n4K8bvHP8leV6KJybyl6R4DsDqA3', '123456');
 		// $auth_controller->enable_user('n4K8bvHP8leV6KJybyl6R4DsDqA3');
@@ -68,7 +92,7 @@ class Site extends Timber\Site {
 	 * @param string $context context['this'] Being the Twig's {{ this }}.
 	 */
 	public function add_to_context( $context ) {
-		$context['menu']  = new Timber\Menu();
+		$context['menu']  = new \Timber\Menu();
 		$context['site']  = $this;
 		return $context;
 	}

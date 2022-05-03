@@ -25,7 +25,7 @@ class User_Controller {
 	 *
 	 * @var mixed|object $user Current User Record.
 	 */
-	public $user = false;
+	private $user = false;
 
 	public function __construct( $is_authorized = false, $firebase_uid = false, $init = false ) {
 		if ( true === $is_authorized ) {
@@ -34,8 +34,12 @@ class User_Controller {
 
 		if ( $firebase_uid ) {
 			// Get user by firebase_id and partner_id.
-			$user = $this->get_user( $firebase_uid );
+			$this->user = $this->get_user( $firebase_uid );
 		}
+	}
+
+	public function current_user() {
+		return $this->user;
 	}
 
 	/**
@@ -58,14 +62,16 @@ class User_Controller {
 				$wpdb->prepare(
 					'SELECT * FROM recipepocket_users WHERE firebase_uid = %s AND active = 1',
 					$firebase_uid
-				)
+				),
+				OBJECT
 			);
 		} else {
 			$user = $wpdb->get_row(
 				$wpdb->prepare(
 					'SELECT * FROM recipepocket_users WHERE firebase_uid = %s',
 					$firebase_uid
-				)
+				),
+				OBJECT
 			);
 		}
 
