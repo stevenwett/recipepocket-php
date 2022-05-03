@@ -1,9 +1,18 @@
 <?php
 /**
- * We're going to configure our theme inside of a subclass of Timber\Site
- * You can move this to its own file and include here via php's include("MySite.php")
+ * Primary controller for Recipepocket
+ *
+ * @package Recipepocket
+ * @author  Steven Wett <stevenwett@gmail.com>
+ * @version 0.0.1
  */
-class Recipepocket_App extends Timber\Site {
+
+namespace Recipepocket;
+
+/**
+ * The primary class for this site.
+ */
+class Site extends Timber\Site {
 	/**
 	 * Auth controller
 	 *

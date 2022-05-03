@@ -52,6 +52,6 @@ Timber::$dirname = array( 'views' );
  */
 Timber::$autoescape = false;
 
-require_once get_template_directory() . '/class-recipepocket-app.php';
+require_once get_template_directory() . '/includes/class-site.php';
 
-new Recipepocket_App();
+new Site();

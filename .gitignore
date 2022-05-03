@@ -28,11 +28,10 @@ wp-content/plugins/*
 !wp-content/themes/
 wp-content/themes/*
 !wp-content/themes/recipepocket
-!wp-content/themes/recipepocket/*
-!wp-content/themes/index.php
+!wp-content/themes/recipepocket/**
 
 !wp-content/uploads/
-wp-content/uploads/*
+wp-content/uploads/**
 
 # ignore node dependency directories
 node_modules/
