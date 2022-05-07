@@ -54,7 +54,7 @@ class Site extends Timber\Site {
 
 		$this->user = $user_controller->current_user();
 
-		var_dump( $this->user );
+		// var_dump( $this->user );
 		// var_dump( $this->is_authorized );
 
 		// $auth_controller->remove_user_authentication();
