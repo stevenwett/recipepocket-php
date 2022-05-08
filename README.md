@@ -48,26 +48,14 @@ Request body:
 Response body:
 ```json
 {
-	"message": "",
-	"user": {
-		"id": 0,
-		"active": 1,
-		"user_id": 0,
-		"name": "",
-		"source": {},
-		"author": "",
-		"preparation_steps": [],
-		"ingredients": [],
-		"created_gmt": "",
-		"modified_gmt": ""
-	}
+	"message": ""
 }
 ```
 * 200: Updated user.
 * 400: Bad request.
 
 ### Delete User
-DELETE `/wp-json/recipepocket/v1/user/?user_id=0`
+DELETE `/wp-json/recipepocket/v1/user?user_id=0`
 * Must be authenticated.
 * `user_id` is required.
 * Deactivates, does not delete.
@@ -92,10 +80,44 @@ Request body:
 {
 	"user_id": 0,
 	"name": "",
+	"description": "",
 	"author": "",
 	"source": {
 		"name": "",
 		"link": ""
+	},
+	"images": [
+		{
+			"link": "",
+			"alt": ""
+		}
+	],
+	"reviews": [
+		{
+			"name": "",
+			"review": "",
+			"rating": {
+				"value": 0,
+				"count": 0
+			},
+			"datetime": ""
+		}
+	],
+	"rating": {
+		"value": 0,
+		"count": 0,
+		"worst": 1,
+		"best": 5
+	},
+	"yield": {
+		"quantity": 0,
+		"units": "",
+		"name": ""
+	},
+	"time": {
+		"prep": 0,
+		"cook": 0,
+		"total": 0
 	},
 	"preparation_steps": [
 		{
@@ -126,7 +148,7 @@ Response body:
 * 400: Bad request.
 
 ### Get Recipe
-GET `/wp-json/recipepocket/v1/recipe/?recipe_id=0&hash=123abc`
+GET `/wp-json/recipepocket/v1/recipe?recipe_id=0&hash=123abc`
 * `recipe_id` is required.
 * User must either be authenticated or a valid `hash` must be provided.
 
@@ -139,10 +161,33 @@ Response body:
 		"active": 1,
 		"user_id": 0,
 		"name": "",
+		"description": "",
 		"author": "",
 		"source": {
 			"name": "",
 			"link": ""
+		},
+		"images": [
+			{
+				"link": "",
+				"alt": ""
+			}
+		],
+		"rating": {
+			"value": 0,
+			"count": 0,
+			"worst": 1,
+			"best": 5
+		},
+		"yield": {
+			"quantity": 0,
+			"units": "",
+			"name": ""
+		},
+		"time": {
+			"prep": 0,
+			"cook": 0,
+			"total": 0
 		},
 		"preparation_steps": [
 			{
@@ -156,7 +201,8 @@ Response body:
 				"units": "",
 				"name": ""
 			}
-		]
+		],
+		"nutrition": {}
 	}
 }
 ```
@@ -172,10 +218,33 @@ Request body:
 	"recipe_id": 0,
 	"active": 1,
 	"name": "",
+	"description": "",
 	"author": "",
 	"source": {
 		"name": "",
 		"link": ""
+	},
+	"images": [
+		{
+			"link": "",
+			"alt": ""
+		}
+	],
+	"rating": {
+		"value": 0,
+		"count": 0,
+		"worst": 1,
+		"best": 5
+	},
+	"yield": {
+		"quantity": 0,
+		"units": "",
+		"name": ""
+	},
+	"time": {
+		"prep": 0,
+		"cook": 0,
+		"total": 0
 	},
 	"preparation_steps": [
 		{
@@ -189,7 +258,8 @@ Request body:
 			"units": "",
 			"name": ""
 		}
-	]
+	],
+	"nutrition": {}
 }
 ```
 * Must be authenticated.
@@ -207,7 +277,7 @@ Response body:
 
 
 ### Delete Recipe
-DELETE `/wp-json/recipepocket/v1/recipe/?recipe_id=0`
+DELETE `/wp-json/recipepocket/v1/recipe?recipe_id=0`
 * Must be authenticated.
 * `recipe_id` is required.
 * Deactivates, does not delete.
@@ -220,4 +290,87 @@ Response body:
 }
 ```
 * 200: Deleted recipe.
+* 400: Bad request.
+
+Response body:
+```json
+{
+	"message": ""
+}
+```
+* 200: Review added.
+* 400: Bad request.
+
+## Review Endpoints
+
+### Add Review
+POST `/wp-json/recipepocket/v1/recipe/review`
+
+Request body:
+```json
+{
+	"recipe_id": 0,
+	"author": "",
+	"review": "",
+	"rating": {
+		"value": 0,
+		"count": 0,
+		"worst": 1,
+		"best": 5
+	}
+}
+```
+* Must be authenticated.
+* `recipe_id` is required.
+
+Response body:
+```json
+{
+	"message": "",
+	"review": {}
+}
+```
+* 200: Review added.
+* 400: Bad request.
+
+### Update Review
+PATCH `/wp-json/recipepocket/v1/recipe/review`
+
+Request body:
+```json
+{
+	"review_id": 0,
+	"author": "",
+	"review": "",
+	"rating": {
+		"value": 0,
+		"count": 0,
+		"worst": 1,
+		"best": 5
+	}
+}
+```
+* Must be authenticated.
+* Can update review if `user_id` on review matches authenticated user's id, or
+* Can update review if `user_id` on recipe matches authenticated user's id.
+
+Response body:
+```json
+{
+	"message": ""
+}
+```
+* 200: Review updated.
+* 400: Bad request.
+
+### Delete Review
+DELETE `/wp-json/recipepocket/v1/recipe/review?review_id=0`
+
+Response body:
+```json
+{
+	"message": ""
+}
+```
+* 200: Review deleted.
 * 400: Bad request.
