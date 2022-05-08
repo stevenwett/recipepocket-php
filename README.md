@@ -38,7 +38,7 @@ Request body:
 	"firebase_uid": "",
 	"email": "",
 	"first_name": "",
-	"last_name": "",
+	"last_name": ""
 }
 ```
 * `user_id` is required.
@@ -94,19 +94,19 @@ Request body:
 	"author": "",
 	"source": {
 		"name": "",
-		"link": "",
+		"link": ""
 	},
 	"preparation_steps": [
 		{
 			"title": "",
-			"description": "",
+			"description": ""
 		}
 	],
 	"ingredients": [
 		{
 			"quantity": 0,
 			"units": "",
-			"name": "",
+			"name": ""
 		}
 	]
 }
@@ -139,19 +139,19 @@ Response body:
 		"author": "",
 		"source": {
 			"name": "",
-			"link": "",
+			"link": ""
 		},
 		"preparation_steps": [
 			{
 				"title": "",
-				"description": "",
+				"description": ""
 			}
 		],
 		"ingredients": [
 			{
 				"quantity": 0,
 				"units": "",
-				"name": "",
+				"name": ""
 			}
 		]
 	}
@@ -174,19 +174,19 @@ Request body:
 	"author": "",
 	"source": {
 		"name": "",
-		"link": "",
+		"link": ""
 	},
 	"preparation_steps": [
 		{
 			"title": "",
-			"description": "",
+			"description": ""
 		}
 	],
 	"ingredients": [
 		{
 			"quantity": 0,
 			"units": "",
-			"name": "",
+			"name": ""
 		}
 	]
 }
