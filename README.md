@@ -1,16 +1,13 @@
 # Recipepocket App
 A free and simple way to store your recipes.
 
-## Endpoints
 \* Asterisks mean you must be authenticated to use this endpoint.
 
-### Auth
+## Auth Endpoints
 This site is using [https://github.com/stevenwett/wp-firebase-auth WP Firebase Auth] to manage user authentication with Firebase.
 
-### User
-
-#### Create User
-POST `/wp-json/recipepocket/v1/user`
+## User Endpoitns
+### Create User: POST `/wp-json/recipepocket/v1/user`
 
 ```
 {
@@ -21,8 +18,7 @@ POST `/wp-json/recipepocket/v1/user`
 ```
 `email` and `first_name` are required.
 
-#### \* Update User
-PATCH `/wp-json/recipepocket/v1/user`
+### \* Update User: PATCH `/wp-json/recipepocket/v1/user`
 
 ```
 {
@@ -35,8 +31,7 @@ PATCH `/wp-json/recipepocket/v1/user`
 ```
 `user_id` is required. `firebase_uid` is required in order to change `email`.
 
-#### \* Delete User
-DELETE `/wp-json/recipepocket/v1/user`
+### \* Delete User: DELETE `/wp-json/recipepocket/v1/user`
 
 ```
 {
@@ -45,10 +40,9 @@ DELETE `/wp-json/recipepocket/v1/user`
 ```
 `user_id` is required. Deactivates, does not delete.
 
-### Recipe
+## Recipe Endpoints
 
-#### \* Create Recipe
-POST `/wp-json/recipepocket/v1/recipe`
+### \* Create Recipe: POST `/wp-json/recipepocket/v1/recipe`
 
 ```
 {
@@ -76,8 +70,7 @@ POST `/wp-json/recipepocket/v1/recipe`
 ```
 `user_id`, `name`, `preparation_steps`, `ingredients` are required.
 
-#### \* Get Recipe
-GET `/wp-json/recipepocket/v1/recipe`
+### \* Get Recipe: GET `/wp-json/recipepocket/v1/recipe`
 
 ```
 {
@@ -86,8 +79,7 @@ GET `/wp-json/recipepocket/v1/recipe`
 ```
 `recipe_id` is required.
 
-#### \* Update Recipe
-PATCH `/wp-json/recipepocket/v1/recipe`
+### \* Update Recipe: PATCH `/wp-json/recipepocket/v1/recipe`
 
 ```
 {
@@ -116,8 +108,7 @@ PATCH `/wp-json/recipepocket/v1/recipe`
 ```
 `recipe_id` is required.
 
-#### \* Delete Recipe
-DELETE `/wp-json/recipepocket/v1/recipe`
+### \* Delete Recipe: DELETE `/wp-json/recipepocket/v1/recipe`
 
 ```
 {
