@@ -346,7 +346,7 @@ class Recipe_Controller {
 
 			$response_code    = $create_response['code'];
 			$response_message = $create_response['message'];
-			$recipe           = $create_response['recipe'];
+			// $recipe           = $create_response['recipe'];
 
 		} catch ( \Exception $e ) {
 			// TODO: Log error.
@@ -360,7 +360,7 @@ class Recipe_Controller {
 		$response = new \WP_REST_Response(
 			array(
 				'message' => $response_message,
-				'recipe'  => $recipe,
+				// 'recipe'  => $recipe,
 			),
 			$response_code
 		);
@@ -439,7 +439,7 @@ class Recipe_Controller {
 
 			$response_code    = $update_response['code'];
 			$response_message = $update_response['message'];
-			$recipe           = $update_response['recipe'];
+			// $recipe           = $update_response['recipe'];
 
 		} catch ( \Exception $e ) {
 			// TODO: Log error.
@@ -453,7 +453,7 @@ class Recipe_Controller {
 		$response = new \WP_REST_Response(
 			array(
 				'message' => $response_message,
-				'recipe'  => $recipe,
+				// 'recipe'  => $recipe,
 			),
 			$response_code
 		);
