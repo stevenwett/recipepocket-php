@@ -1,8 +1,6 @@
 # Recipepocket App
 A free and simple way to store your recipes.
 
-\* Asterisks mean you must be authenticated to use this endpoint.
-
 ## Auth Endpoints
 This site is using [WP Firebase Auth](https://github.com/stevenwett/wp-firebase-auth) to manage user authentication with Firebase.
 
@@ -20,7 +18,7 @@ Request Body:
 ```
 * `email` and `first_name` are required.
 
-### Update User\*
+### Update User
 PATCH `/wp-json/recipepocket/v1/user`
 
 Request Body:
@@ -34,16 +32,18 @@ Request Body:
 }
 ```
 * `user_id` is required. `firebase_uid` is required in order to change `email`.
+* Must be authenticated.
 
-### Delete User\*
+### Delete User
 DELETE `/wp-json/recipepocket/v1/user/?user_id=0`
 
 * `user_id` is required.
+* Must be authenticated.
 * Deactivates, does not delete.
 
 ## Recipe Endpoints
 
-### Create Recipe\*
+### Create Recipe
 POST `/wp-json/recipepocket/v1/recipe`
 
 Request Body:
@@ -72,13 +72,15 @@ Request Body:
 }
 ```
 * `user_id`, `name`, `preparation_steps`, `ingredients` are required.
+* Must be authenticated.
 
-### Get Recipe\*
-GET `/wp-json/recipepocket/v1/recipe/?recipe_id=0`
+### Get Recipe
+GET `/wp-json/recipepocket/v1/recipe/?recipe_id=0&hash=123abc`
 
 * `recipe_id` is required.
+* User must either be authenticated or a valid `hash` must be provided.
 
-### Update Recipe\*
+### Update Recipe
 PATCH `/wp-json/recipepocket/v1/recipe`
 
 ```json
@@ -107,11 +109,13 @@ PATCH `/wp-json/recipepocket/v1/recipe`
 }
 ```
 * `recipe_id` is required.
+* Must be authenticated.
 * Can only be used if `user_id` found in the requested recipe matches the authenticated user's id.
 
-### Delete Recipe\*
+### Delete Recipe
 DELETE `/wp-json/recipepocket/v1/recipe/?recipe_id=0`
 
 * `recipe_id` is required.
+* Must be authenticated.
 * Deactivates, does not delete.
 * Can only be used if `user_id` in this recipe matches the authenticated user's id.

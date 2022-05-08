@@ -302,6 +302,17 @@ class Recipe_Controller {
 				'permission_callback' => array( $this, 'endpoint_permissions_authenticated_users' ),
 			)
 		);
+
+		// The endpoint for getting a recipe.
+		register_rest_route(
+			'recipepocket/v1',
+			'/recipe',
+			array(
+				'methods'             => 'DELETE',
+				'callback'            => array( $this, 'endpoint_callback_update_recipe' ),
+				'permission_callback' => array( $this, 'endpoint_permissions_authenticated_users' ),
+			)
+		);
 	}
 
 	/**
