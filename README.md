@@ -29,7 +29,6 @@ Response body:
 
 ### Update User
 PATCH `/wp-json/recipepocket/v1/user`
-* Must be authenticated.
 
 Request body:
 ```json
@@ -43,6 +42,8 @@ Request body:
 ```
 * `user_id` is required.
 * `firebase_uid` is required in order to change `email`.
+* Must be authenticated.
+* `user_id` must match with authenticated user's id.
 
 Response body:
 ```json
@@ -70,6 +71,7 @@ DELETE `/wp-json/recipepocket/v1/user/?user_id=0`
 * `user_id` is required.
 * Must be authenticated.
 * Deactivates, does not delete.
+* `user_id` must match with authenticated user's id.
 
 Response body:
 ```json
@@ -84,7 +86,6 @@ Response body:
 
 ### Create Recipe
 POST `/wp-json/recipepocket/v1/recipe`
-* Must be authenticated.
 
 Request body:
 ```json
@@ -111,6 +112,8 @@ Request body:
 	]
 }
 ```
+* Must be authenticated.
+* `user_id` must match with authenticated user's id.
 * `user_id`, `name`, `preparation_steps`, `ingredients` are required.
 
 Response body:
@@ -162,8 +165,6 @@ Response body:
 
 ### Update Recipe
 PATCH `/wp-json/recipepocket/v1/recipe`
-* Must be authenticated.
-* Can only be used if `user_id` found in the requested recipe matches the authenticated user's id.
 
 Request body:
 ```json
@@ -192,6 +193,8 @@ Request body:
 }
 ```
 * `recipe_id` is required.
+* Must be authenticated.
+* Can only be used if `user_id` found in the requested recipe matches the authenticated user's id.
 
 Response body:
 ```json
