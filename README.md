@@ -4,9 +4,9 @@ A free and simple way to store your recipes.
 \* Asterisks mean you must be authenticated to use this endpoint.
 
 ## Auth Endpoints
-This site is using [https://github.com/stevenwett/wp-firebase-auth WP Firebase Auth] to manage user authentication with Firebase.
+This site is using [WP Firebase Auth](https://github.com/stevenwett/wp-firebase-auth) to manage user authentication with Firebase.
 
-## User Endpoitns
+## User Endpoints
 ### Create User: POST `/wp-json/recipepocket/v1/user`
 
 ```
@@ -18,7 +18,7 @@ This site is using [https://github.com/stevenwett/wp-firebase-auth WP Firebase A
 ```
 `email` and `first_name` are required.
 
-### \* Update User: PATCH `/wp-json/recipepocket/v1/user`
+### Update User\*: PATCH `/wp-json/recipepocket/v1/user`
 
 ```
 {
@@ -31,7 +31,7 @@ This site is using [https://github.com/stevenwett/wp-firebase-auth WP Firebase A
 ```
 `user_id` is required. `firebase_uid` is required in order to change `email`.
 
-### \* Delete User: DELETE `/wp-json/recipepocket/v1/user`
+### Delete User\*: DELETE `/wp-json/recipepocket/v1/user`
 
 ```
 {
@@ -42,7 +42,7 @@ This site is using [https://github.com/stevenwett/wp-firebase-auth WP Firebase A
 
 ## Recipe Endpoints
 
-### \* Create Recipe: POST `/wp-json/recipepocket/v1/recipe`
+### Create Recipe\*: POST `/wp-json/recipepocket/v1/recipe`
 
 ```
 {
@@ -70,7 +70,7 @@ This site is using [https://github.com/stevenwett/wp-firebase-auth WP Firebase A
 ```
 `user_id`, `name`, `preparation_steps`, `ingredients` are required.
 
-### \* Get Recipe: GET `/wp-json/recipepocket/v1/recipe`
+### Get Recipe\*: GET `/wp-json/recipepocket/v1/recipe`
 
 ```
 {
@@ -79,7 +79,7 @@ This site is using [https://github.com/stevenwett/wp-firebase-auth WP Firebase A
 ```
 `recipe_id` is required.
 
-### \* Update Recipe: PATCH `/wp-json/recipepocket/v1/recipe`
+### Update Recipe\*: PATCH `/wp-json/recipepocket/v1/recipe`
 
 ```
 {
@@ -108,7 +108,7 @@ This site is using [https://github.com/stevenwett/wp-firebase-auth WP Firebase A
 ```
 `recipe_id` is required.
 
-### \* Delete Recipe: DELETE `/wp-json/recipepocket/v1/recipe`
+### Delete Recipe\*: DELETE `/wp-json/recipepocket/v1/recipe`
 
 ```
 {
