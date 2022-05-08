@@ -18,7 +18,7 @@ Request Body:
 	"last_name": ""
 }
 ```
-`email` and `first_name` are required.
+* `email` and `first_name` are required.
 
 ### Update User\*
 PATCH `/wp-json/recipepocket/v1/user`
@@ -33,12 +33,13 @@ Request Body:
 	"last_name": "",
 }
 ```
-`user_id` is required. `firebase_uid` is required in order to change `email`.
+* `user_id` is required. `firebase_uid` is required in order to change `email`.
 
 ### Delete User\*
 DELETE `/wp-json/recipepocket/v1/user/?user_id=0`
 
-`user_id` is required. Deactivates, does not delete.
+* `user_id` is required.
+* Deactivates, does not delete.
 
 ## Recipe Endpoints
 
@@ -70,12 +71,12 @@ Request Body:
 	]
 }
 ```
-`user_id`, `name`, `preparation_steps`, `ingredients` are required.
+* `user_id`, `name`, `preparation_steps`, `ingredients` are required.
 
 ### Get Recipe\*
 GET `/wp-json/recipepocket/v1/recipe/?recipe_id=0`
 
-`recipe_id` is required.
+* `recipe_id` is required.
 
 ### Update Recipe\*
 PATCH `/wp-json/recipepocket/v1/recipe`
@@ -105,9 +106,12 @@ PATCH `/wp-json/recipepocket/v1/recipe`
 	]
 }
 ```
-`recipe_id` is required.
+* `recipe_id` is required.
+* Can only be used if `user_id` found in the requested recipe matches the authenticated user's id.
 
 ### Delete Recipe\*
 DELETE `/wp-json/recipepocket/v1/recipe/?recipe_id=0`
 
-`recipe_id` is required. Deactivates, does not delete. Can only be used if `user_id` in this recipe matches the authenticated user's id.
+* `recipe_id` is required.
+* Deactivates, does not delete.
+* Can only be used if `user_id` in this recipe matches the authenticated user's id.
