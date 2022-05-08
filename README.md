@@ -92,17 +92,6 @@ POST `/wp-json/recipepocket/v1/recipe`
 			"alt": ""
 		}
 	],
-	"reviews": [
-		{
-			"name": "",
-			"review": "",
-			"rating": {
-				"value": 0,
-				"count": 0
-			},
-			"datetime": ""
-		}
-	],
 	"rating": {
 		"value": 0,
 		"count": 0,
