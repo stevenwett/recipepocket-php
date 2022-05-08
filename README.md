@@ -24,6 +24,8 @@ Response body:
 	"message": ""
 }
 ```
+
+Response codes:
 * 201: Created user.
 * 400: Bad request.
 
@@ -51,6 +53,8 @@ Response body:
 	"message": ""
 }
 ```
+
+Response codes:
 * 200: Updated user.
 * 400: Bad request.
 
@@ -67,6 +71,8 @@ Response body:
 	"message": ""
 }
 ```
+
+Response codes:
 * 200: Deleted user.
 * 400: Bad request.
 
@@ -144,6 +150,8 @@ Response body:
 	"message": ""
 }
 ```
+
+Response codes:
 * 201: Created recipe.
 * 400: Bad request.
 
@@ -206,6 +214,8 @@ Response body:
 	}
 }
 ```
+
+Response codes:
 * 201: Created recipe.
 * 400: Bad request.
 
@@ -272,6 +282,8 @@ Response body:
 	"message": ""
 }
 ```
+
+Response codes:
 * 200: Updated recipe.
 * 400: Bad request.
 
@@ -289,6 +301,8 @@ Response body:
 	"message": ""
 }
 ```
+
+Response codes:
 * 200: Deleted recipe.
 * 400: Bad request.
 
@@ -330,6 +344,8 @@ Response body:
 	"review": {}
 }
 ```
+
+Response codes:
 * 200: Review added.
 * 400: Bad request.
 
@@ -351,7 +367,7 @@ Request body:
 }
 ```
 * Must be authenticated.
-* Can update review if `user_id` on review matches authenticated user's id, or
+* Can update review if `user_id` on review matches authenticated user's id, or;
 * Can update review if `user_id` on recipe matches authenticated user's id.
 
 Response body:
@@ -360,6 +376,8 @@ Response body:
 	"message": ""
 }
 ```
+
+Response codes:
 * 200: Review updated.
 * 400: Bad request.
 
@@ -372,5 +390,7 @@ Response body:
 	"message": ""
 }
 ```
+
+Response codes:
 * 200: Review deleted.
 * 400: Bad request.
