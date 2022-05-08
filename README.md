@@ -8,7 +8,7 @@ This site is using [WP Firebase Auth](https://github.com/stevenwett/wp-firebase-
 ### Create User
 POST `/wp-json/recipepocket/v1/user`
 
-Request body:
+#### Request Body
 ```json
 {
 	"email": "",
@@ -16,23 +16,21 @@ Request body:
 	"last_name": ""
 }
 ```
-* `email` and `first_name` are required.
+* `email` and `first_name` are required
 
-Response body:
+#### Response
 ```json
 {
 	"message": ""
 }
 ```
-
-Response codes:
-* 201: Created user.
-* 400: Bad request.
+* 201: Created user
+* 400: Bad request
 
 ### Update User
 PATCH `/wp-json/recipepocket/v1/user`
 
-Request body:
+#### Request Body
 ```json
 {
 	"user_id": 0,
@@ -42,46 +40,42 @@ Request body:
 	"last_name": ""
 }
 ```
-* Must be authenticated.
-* `user_id` is required.
-* `firebase_uid` is required in order to change `email`.
-* `user_id` must match with authenticated user's id.
+* Must be authenticated
+* `user_id` is required
+* `firebase_uid` is required in order to change `email`
+* `user_id` must match with authenticated user's id
 
-Response body:
+#### Response
+* 200: Updated user
+* 400: Bad request
 ```json
 {
 	"message": ""
 }
 ```
-
-Response codes:
-* 200: Updated user.
-* 400: Bad request.
 
 ### Delete User
 DELETE `/wp-json/recipepocket/v1/user?user_id=0`
-* Must be authenticated.
-* `user_id` is required.
-* Deactivates, does not delete.
-* `user_id` must match with authenticated user's id.
+* Must be authenticated
+* `user_id` is required
+* Deactivates, does not delete
+* `user_id` must match with authenticated user's id
 
-Response body:
+#### Response
 ```json
 {
 	"message": ""
 }
 ```
-
-Response codes:
-* 200: Deleted user.
-* 400: Bad request.
+* 200: Deleted user
+* 400: Bad request
 
 ## Recipe Endpoints
 
 ### Create Recipe
 POST `/wp-json/recipepocket/v1/recipe`
 
-Request body:
+#### Request Body
 ```json
 {
 	"user_id": 0,
@@ -140,27 +134,27 @@ Request body:
 	]
 }
 ```
-* Must be authenticated.
-* `user_id` must match with authenticated user's id.
-* `user_id`, `name`, `preparation_steps`, `ingredients` are required.
+* Must be authenticated
+* `user_id` must match with authenticated user's id
+* `user_id`, `name`, `preparation_steps`, `ingredients` are required
 
-Response body:
+#### Response
 ```json
 {
 	"message": ""
 }
 ```
-
-Response codes:
-* 201: Created recipe.
-* 400: Bad request.
+* 201: Created recipe
+* 400: Bad request
 
 ### Get Recipe
 GET `/wp-json/recipepocket/v1/recipe?recipe_id=0&hash=123abc`
-* `recipe_id` is required.
-* User must either be authenticated or a valid `hash` must be provided.
+* `recipe_id` is required
+* User must either be authenticated or a valid `hash` must be provided
 
-Response body:
+#### Response
+* 200: Got recipe
+* 400: Bad request
 ```json
 {
 	"message": "",
@@ -215,14 +209,10 @@ Response body:
 }
 ```
 
-Response codes:
-* 201: Created recipe.
-* 400: Bad request.
-
 ### Update Recipe
 PATCH `/wp-json/recipepocket/v1/recipe`
 
-Request body:
+#### Request Body
 ```json
 {
 	"recipe_id": 0,
@@ -272,55 +262,41 @@ Request body:
 	"nutrition": {}
 }
 ```
-* Must be authenticated.
-* `recipe_id` is required.
-* Can only be used if `user_id` found in the requested recipe matches the authenticated user's id.
+* Must be authenticated
+* `recipe_id` is required
+* Can only be used if `user_id` found in the requested recipe matches the authenticated user's id
 
-Response body:
+#### Response
 ```json
 {
 	"message": ""
 }
 ```
-
-Response codes:
-* 200: Updated recipe.
-* 400: Bad request.
-
+* 200: Updated recipe
+* 400: Bad request
 
 ### Delete Recipe
 DELETE `/wp-json/recipepocket/v1/recipe?recipe_id=0`
-* Must be authenticated.
-* `recipe_id` is required.
-* Deactivates, does not delete.
-* Can only be used if `user_id` in this recipe matches the authenticated user's id.
+* Must be authenticated
+* `recipe_id` is required
+* Deactivates, does not delete
+* Can only be used if `user_id` in this recipe matches the authenticated user's id
 
-Response body:
+#### Response
 ```json
 {
 	"message": ""
 }
 ```
-
-Response codes:
-* 200: Deleted recipe.
-* 400: Bad request.
-
-Response body:
-```json
-{
-	"message": ""
-}
-```
-* 200: Review added.
-* 400: Bad request.
+* 200: Deleted recipe
+* 400: Bad request
 
 ## Review Endpoints
 
 ### Add Review
 POST `/wp-json/recipepocket/v1/recipe/review`
 
-Request body:
+#### Request Body
 ```json
 {
 	"recipe_id": 0,
@@ -334,25 +310,23 @@ Request body:
 	}
 }
 ```
-* Must be authenticated.
-* `recipe_id` is required.
+* Must be authenticated
+* `recipe_id` is required
 
-Response body:
+#### Response
 ```json
 {
 	"message": "",
 	"review": {}
 }
 ```
-
-Response codes:
-* 200: Review added.
-* 400: Bad request.
+* 200: Review added
+* 400: Bad request
 
 ### Update Review
 PATCH `/wp-json/recipepocket/v1/recipe/review`
 
-Request body:
+#### Request Body
 ```json
 {
 	"review_id": 0,
@@ -366,31 +340,27 @@ Request body:
 	}
 }
 ```
-* Must be authenticated.
-* Can update review if `user_id` on review matches authenticated user's id, or;
-* Can update review if `user_id` on recipe matches authenticated user's id.
+* Must be authenticated
+* Can update review if `user_id` on review matches authenticated user's id, or
+* Can update review if `user_id` on recipe matches authenticated user's id
 
-Response body:
+#### Response Body
 ```json
 {
 	"message": ""
 }
 ```
-
-Response codes:
 * 200: Review updated.
 * 400: Bad request.
 
 ### Delete Review
 DELETE `/wp-json/recipepocket/v1/recipe/review?review_id=0`
 
-Response body:
+#### Response Body
 ```json
 {
 	"message": ""
 }
 ```
-
-Response codes:
 * 200: Review deleted.
 * 400: Bad request.
