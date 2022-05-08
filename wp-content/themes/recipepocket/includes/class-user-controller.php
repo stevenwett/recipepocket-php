@@ -435,7 +435,7 @@ class User_Controller {
 	}
 
 	/**
-	 * REST API endpoing callback function for logging in a user
+	 * REST API endpoing callback function for creating a user
 	 *
 	 * @param \WP_REST_Request $request request object.
 	 */
@@ -489,7 +489,7 @@ class User_Controller {
 	}
 
 	/**
-	 * REST API endpoing callback function for logging in a user
+	 * REST API endpoing callback function for reading a user
 	 *
 	 * @param \WP_REST_Request $request request object.
 	 */
@@ -497,7 +497,7 @@ class User_Controller {
 	}
 
 	/**
-	 * REST API endpoing callback function for logging in a user
+	 * REST API endpoing callback function for updating a user
 	 *
 	 * @param \WP_REST_Request $request request object.
 	 */
@@ -510,6 +510,8 @@ class User_Controller {
 			if ( empty( $request['user_id'] ) ) {
 				throw new \Exception( 'User ID not in request.', 400 );
 			}
+
+			// TODO: Check that user_id matches that auth user id.
 
 			// Update user.
 			$update_response = $this->update_user( $request );
@@ -536,5 +538,13 @@ class User_Controller {
 		);
 
 		return rest_ensure_response( $response );
+	}
+
+	/**
+	 * REST API endpoing callback function for deleting a user.
+	 *
+	 * @param \WP_REST_Request $request request object.
+	 */
+	public function endpoint_callback_delete_user( \WP_REST_Request $request ) {
 	}
 }
