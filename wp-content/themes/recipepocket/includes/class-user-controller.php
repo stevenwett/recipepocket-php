@@ -172,8 +172,8 @@ class User_Controller {
 				'email'        => $email,
 				'first_name'   => '',
 				'last_name'    => '',
-				'gmt_created'  => current_time( 'mysql', true ),
-				'gmt_modified' => current_time( 'mysql', true ),
+				'created_gmt'  => current_time( 'mysql', true ),
+				'modified_gmt' => current_time( 'mysql', true ),
 			);
 
 			if ( isset( $user_data['first_name'] ) ) {
@@ -204,7 +204,7 @@ class User_Controller {
 				throw new \Exception( 'Could not add a new user. User may already exist.', 409 );
 			}
 
-			$response_code    = 200;
+			$response_code    = 201;
 			$response_message = 'New user created.';
 		} catch ( \Exception $e ) {
 			// TODO: Log error.
@@ -227,15 +227,13 @@ class User_Controller {
 
 		$response_code    = 400;
 		$response_message = '';
-		$response_user    = array();
+		$updated_user     = array();
 
 		try {
 			if ( empty( $user_data ) ) {
 				throw new \Exception( 'No user data.', 400 );
 			}
 
-			// var_dump($user_data);
-			// die();
 			if ( empty( $user_data['user_id'] ) ) {
 				throw new \Exception( 'No user id.', 400 );
 			}
@@ -243,7 +241,7 @@ class User_Controller {
 			$user_id      = (int) $user_data['user_id'];
 			$firebase_uid = $user_data['firebase_uid'];
 			$user         = array(
-				'gmt_modified' => current_time( 'mysql', true ),
+				'modified_gmt' => current_time( 'mysql', true ),
 			);
 
 			$format = array(
@@ -263,15 +261,13 @@ class User_Controller {
 					throw new \Exception( 'Email not valid.', 406 );
 				}
 
-				// TODO: Update firebase email.
+				// Update firebase email.
 				if ( empty( $user_data['firebase_uid'] ) ) {
 					throw new \Exception( 'Need firebase_uid in order to change email.', 400 );
 				}
 
 				$auth_controller       = new \Stevenwett\WPFirebaseAuth\Auth();
 				$update_firebase_email = $auth_controller->update_email( $email );
-
-				die();
 
 				if ( false === $update_firebase_email ) {
 					throw new \Exception( 'Unable to update Firebase email.', 400 );
@@ -313,9 +309,14 @@ class User_Controller {
 				throw new \Exception( 'Error updating user.', 409 );
 			}
 
-			$response_user    = $this->get_user( $firebase_uid );
-			$response_message = 'Updated user.';
+			$updated_user = $this->get_user( $firebase_uid );
 
+			if ( empty( $updated_user ) ) {
+				throw new \Exception( 'Error getting user after updating.', 409 );
+			}
+
+			$response_code    = 200;
+			$response_message = 'Updated user.';
 		} catch ( \Exception $e ) {
 			// TODO: Log error.
 			$response_message = $e->getMessage();
@@ -324,7 +325,7 @@ class User_Controller {
 		return array(
 			'code'    => $response_code,
 			'message' => $response_message,
-			'user'    => $response_user,
+			'user'    => $updated_user,
 		);
 	}
 
@@ -447,16 +448,17 @@ class User_Controller {
 				throw new \Exception( 'Email not in request.', 400 );
 			}
 
+			if ( empty( $request['first_name'] ) ) {
+				throw new \Exception( 'first_name not in request.', 400 );
+			}
+
 			$user_data = array(
 				'email'      => $request['email'],
-				'first_name' => '',
+				'first_name' => sanitize_text_field( $request['first_name'] ),
 				'last_name'  => '',
 			);
 
-			if ( isset( $request['first_name'] ) ) {
-				$user_data['first_name'] = sanitize_text_field( $request['first_name'] );
-			}
-
+			// Last name is optional.
 			if ( isset( $request['last_name'] ) ) {
 				$user_data['last_name'] = sanitize_text_field($request['last_name'] );
 			}
@@ -508,8 +510,6 @@ class User_Controller {
 			if ( empty( $request['user_id'] ) ) {
 				throw new \Exception( 'User ID not in request.', 400 );
 			}
-
-			// $user_id = (int) $request['user_id'];
 
 			// Update user.
 			$update_response = $this->update_user( $request );

@@ -54,6 +54,9 @@ class Site extends Timber\Site {
 
 		$this->user = $user_controller->current_user();
 
+		require_once get_template_directory() . '/includes/class-recipe-controller.php';
+		$recipe_controller = new \Recipepocket\Recipe_Controller( true );
+
 		// var_dump( $this->user );
 		// var_dump( $this->is_authorized );
 
