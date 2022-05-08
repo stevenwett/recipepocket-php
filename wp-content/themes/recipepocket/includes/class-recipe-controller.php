@@ -92,6 +92,8 @@ class Recipe_Controller {
 			$preparation_steps = wp_json_encode( $recipe_data['preparation_steps'] );
 			$ingredients       = wp_json_encode( $recipe_data['ingredients'] );
 
+			// yield, rating, reviews, description, image, time.
+
 			if ( ! empty( $recipe_data['source'] ) ) {
 				$source = wp_json_encode( $recipe_data['source'] );
 			}
@@ -264,6 +266,22 @@ class Recipe_Controller {
 	 * @param string $url Recipe URL.
 	 */
 	public function get_recipe_from_url( $url ) {
+		// Get page contents. Look for JSON-LD.
+		$external_page_content = file_get_contents( $url );
+
+		// retrieve the JSON data
+		$d = new DomDocument();
+		@$d->loadHTML( $external_page_content );
+
+		// parse the HTML to retrieve the "ld+json" only
+		$xp = new domxpath( $d );
+		$jsonScripts = $xp->query( '//script[@type="application/ld+json"]' );
+		$json = trim( $jsonScripts->item(0)->nodeValue );
+
+		// decode the JSON string we find into a associative array
+		$data = json_decode( $json, true );
+
+		// TODO: Get deta from JSON and format it to create a recipe.
 	}
 
 	/**
