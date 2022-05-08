@@ -344,23 +344,23 @@ PATCH `/wp-json/recipepocket/v1/recipe/review`
 * Can update review if `user_id` on review matches authenticated user's id, or
 * Can update review if `user_id` on recipe matches authenticated user's id
 
-#### Response Body
+#### Response
 ```json
 {
 	"message": ""
 }
 ```
-* 200: Review updated.
-* 400: Bad request.
+* 200: Review updated
+* 400: Bad request
 
 ### Delete Review
 DELETE `/wp-json/recipepocket/v1/recipe/review?review_id=0`
 
-#### Response Body
+#### Response
 ```json
 {
 	"message": ""
 }
 ```
-* 200: Review deleted.
-* 400: Bad request.
+* 200: Review deleted
+* 400: Bad request
