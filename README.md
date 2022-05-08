@@ -40,9 +40,9 @@ Request body:
 	"last_name": ""
 }
 ```
+* Must be authenticated.
 * `user_id` is required.
 * `firebase_uid` is required in order to change `email`.
-* Must be authenticated.
 * `user_id` must match with authenticated user's id.
 
 Response body:
@@ -68,8 +68,8 @@ Response body:
 
 ### Delete User
 DELETE `/wp-json/recipepocket/v1/user/?user_id=0`
-* `user_id` is required.
 * Must be authenticated.
+* `user_id` is required.
 * Deactivates, does not delete.
 * `user_id` must match with authenticated user's id.
 
@@ -192,8 +192,8 @@ Request body:
 	]
 }
 ```
-* `recipe_id` is required.
 * Must be authenticated.
+* `recipe_id` is required.
 * Can only be used if `user_id` found in the requested recipe matches the authenticated user's id.
 
 Response body:
@@ -208,8 +208,8 @@ Response body:
 
 ### Delete Recipe
 DELETE `/wp-json/recipepocket/v1/recipe/?recipe_id=0`
-* `recipe_id` is required.
 * Must be authenticated.
+* `recipe_id` is required.
 * Deactivates, does not delete.
 * Can only be used if `user_id` in this recipe matches the authenticated user's id.
 
