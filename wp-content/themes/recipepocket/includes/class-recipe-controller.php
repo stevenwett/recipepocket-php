@@ -341,6 +341,11 @@ class Recipe_Controller {
 		$recipe = array();
 
 		try {
+			// Only create recipes to your own account.
+			if ( empty( $request['user_id'] ) ) {
+				throw new \Exception( 'user_id not in request.', 400 );
+			}
+			// TODO: Check that user_id matches that auth user id.
 
 			$create_response = $this->create_recipe( $request );
 
@@ -380,6 +385,12 @@ class Recipe_Controller {
 		$recipe = array();
 
 		try {
+			// if ( empty( $request['user_id'] ) ) {
+			// 	throw new \Exception( 'user_id not in request.', 400 );
+			// }
+			// TODO: Check that user_id matches that auth user id.
+			// TODO: Or validate hash.
+
 			if ( empty( $request['recipe_id'] ) ) {
 				throw new \Exception( 'No recipe_id.', 400 );
 			}
@@ -430,6 +441,12 @@ class Recipe_Controller {
 		$recipe           = array();
 
 		try {
+			// Only update recipes on your own account.
+			if ( empty( $request['user_id'] ) ) {
+				throw new \Exception( 'user_id not in request.', 400 );
+			}
+			// TODO: Check that user_id matches that auth user id.
+
 			if ( empty( $request['recipe_id'] ) ) {
 				throw new \Exception( 'recipe_id not in request.', 400 );
 			}
