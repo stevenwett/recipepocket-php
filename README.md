@@ -13,9 +13,9 @@ POST `/wp-json/recipepocket/v1/user`
 Request Body:
 ```json
 {
-	email: '',
-	first_name: '',
-	last_name: ''
+	"email": "",
+	"first_name": "",
+	"last_name": ""
 }
 ```
 `email` and `first_name` are required.
@@ -26,11 +26,11 @@ PATCH `/wp-json/recipepocket/v1/user`
 Request Body:
 ```json
 {
-	user_id: 0,
-	firebase_uid: '',
-	email: '',
-	first_name: '',
-	last_name: '',
+	"user_id": 0,
+	"firebase_uid": "",
+	"email": "",
+	"first_name": "",
+	"last_name": "",
 }
 ```
 `user_id` is required. `firebase_uid` is required in order to change `email`.
@@ -48,24 +48,24 @@ POST `/wp-json/recipepocket/v1/recipe`
 Request Body:
 ```json
 {
-	user_id: 0,
-	name: '',
-	author: '',
-	source: {
-		name: '',
-		link: '',
+	"user_id": 0,
+	"name": "",
+	"author": "",
+	"source": {
+		"name": "",
+		"link": "",
 	},
-	preparation_steps: [
+	"preparation_steps": [
 		{
-			title: '',
-			description: '',
+			"title": "",
+			"description": "",
 		}
 	],
-	ingredients: [
+	"ingredients": [
 		{
-			quantity: 0,
-			units: '',
-			name: '',
+			"quantity": 0,
+			"units": "",
+			"name": "",
 		}
 	]
 }
@@ -82,25 +82,25 @@ PATCH `/wp-json/recipepocket/v1/recipe`
 
 ```json
 {
-	recipe_id: 0,
-	active: 1,
-	name: '',
-	author: '',
-	source: {
-		name: '',
-		link: '',
+	"recipe_id": 0,
+	"active": 1,
+	"name": "",
+	"author": "",
+	"source": {
+		"name": "",
+		"link": "",
 	},
-	preparation_steps: [
+	"preparation_steps": [
 		{
-			title: '',
-			description: '',
+			"title": "",
+			"description": "",
 		}
 	],
-	ingredients: [
+	"ingredients": [
 		{
-			quantity: 0,
-			units: '',
-			name: '',
+			"quantity": 0,
+			"units": "",
+			"name": "",
 		}
 	]
 }
