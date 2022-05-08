@@ -21,7 +21,7 @@ Request body:
 Response body:
 ```json
 {
-	"message": "",
+	"message": ""
 }
 ```
 * 201: Created user.
@@ -74,7 +74,7 @@ DELETE `/wp-json/recipepocket/v1/user/?user_id=0`
 Response body:
 ```json
 {
-	"message": "",
+	"message": ""
 }
 ```
 * 200: Deleted user.
@@ -116,7 +116,7 @@ Request body:
 Response body:
 ```json
 {
-	"message": "",
+	"message": ""
 }
 ```
 * 201: Created recipe.
@@ -196,7 +196,7 @@ Request body:
 Response body:
 ```json
 {
-	"message": "",
+	"message": ""
 }
 ```
 * 200: Updated recipe.
@@ -213,7 +213,7 @@ DELETE `/wp-json/recipepocket/v1/recipe/?recipe_id=0`
 Response body:
 ```json
 {
-	"message": "",
+	"message": ""
 }
 ```
 * 200: Deleted recipe.
